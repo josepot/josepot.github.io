@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://josepot.github.io/sitemap.xml 
