@@ -6,8 +6,7 @@
       {% if post.categories %}
       &nbsp;on
       {% for category in post.categories %}
-      <a href="{{ root_url }}/{{ site.category_dir }}/{{ category | replace:' ','-' | replace:'.','-dot-' | downcase }}/">{{ category }}</a>
-      &nbsp;
+      <a href="{{ root_url }}/{{ site.category_dir }}/{{ category | replace:' ','-' | replace:'.','-dot-' | downcase }}/">{{ category }}</a>{%unless forloop.last %},{% endunless %}
       {% endfor %}
       {% endif %}
     </div>
@@ -24,8 +23,7 @@
       {% if page.categories %}
       &nbsp;on
       {% for category in page.categories %}
-      <a href="{{ root_url }}/{{ site.category_dir }}/{{ category | replace:' ','-' | replace:'.','-dot-' | downcase }}/">{{ category }}</a>
-      &nbsp;
+      <a href="{{ root_url }}/{{ site.category_dir }}/{{ category | replace:' ','-' | replace:'.','-dot-' | downcase }}/">{{ category }}</a>{%unless forloop.last %},{% endunless %}
       {% endfor %}
       {% endif %}
     </div>
