@@ -190,7 +190,7 @@ p, li {
 
 .highlight, .gist-highlight {
   pre { background: none; @include border-radius(0px); border: none; padding: 0; margin-bottom: 0; }
-  margin-bottom: 0.85em;
+  margin-bottom: 1.3em;
   background: $code-bg-color;
   overflow-y: hidden;
   overflow-x: auto;

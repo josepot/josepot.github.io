@@ -2,7 +2,7 @@
 {% if index %}
   <header class="post-header">
     <h2 class="post-title"><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h2>
-    <span class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+    <div class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
       {% if post.categories %}
       &nbsp;on
       {% for category in post.categories %}
@@ -10,7 +10,7 @@
       &nbsp;
       {% endfor %}
       {% endif %}
-    </span>
+    </div>
   </header>
   <section class="post-excerpt">
     {{ content | excerpt }}
@@ -20,7 +20,7 @@
 {% else %}
   <header>
     <h1>{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
-	  <span class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ page.date }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+	  <div class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ page.date }}">{{ page.date | date: "%b %-d, %Y" }}</time>
       {% if page.categories %}
       &nbsp;on
       {% for category in page.categories %}
@@ -28,7 +28,7 @@
       &nbsp;
       {% endfor %}
       {% endif %}
-    </span>
+    </div>
   </header>
   <div class="row-fluid">
     <div class="span12">
