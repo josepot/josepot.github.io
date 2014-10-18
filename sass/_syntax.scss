@@ -98,12 +98,12 @@ p, li {
     display: inline-block;
     white-space: no-wrap;
     background: #A4B9D1 !important;/*$code-bg-color !important;*/
-    font-size: 90%;
+    font-size: 79%;
     color: #373D44 !important;/*$base1 !important;*/
     border: none;
     @include border-radius(.4em);
-    padding: 0 .3em;
-    margin: -1px 0;
+    padding: 0.12em .3em;
+    margin: -0.14em 0;
   }
   pre code { font-size: 1em !important; background: none; border: none; }
 }
