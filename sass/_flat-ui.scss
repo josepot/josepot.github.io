@@ -2578,12 +2578,13 @@ body.vjs-full-window {
   margin-left: 20px; }
 
 .jumbotron {
+  text-align: center;
   font-size: 50px;
-  letter-spacing: -4px;
+  letter-spacing: 0px;
   line-height: 58px;
   font-family: "Quicksand";
   position: relative;
-  padding: 70px 0;
+  padding: 35px 0;
   color: $primary-color; }
 .jumbotron:after {
   content: '';

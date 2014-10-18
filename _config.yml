@@ -3,8 +3,8 @@
 # ----------------------- #
 
 url: http://sobrepere.com
-title: Josep M Sobrepere | My Angular Journey
-subtitle: Here I will be sharing my Angular progress
+title: Josep M Sobrepere
+subtitle: Some Developer's Thoughts
 author: Josep M Sobrepere
 simple_search: https://www.google.com/search
 description:
@@ -24,6 +24,15 @@ email:
 # ----------------------- #
 #    Jekyll & Plugins     #
 # ----------------------- #
+
+#Navigation
+navigation:
+- text: Home
+  url: /index.html
+- text: Archives
+  url: /blog/archives/
+- text: RSS
+  url: /atom.xml
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
 root: /
