@@ -17,10 +17,10 @@
     position: relative;
   }
   .jumbotron .contact .stack-overflow:hover{ background-color:#2a6496; }
-  .jumbotron .contact .stack-overflow i {
-    font: 27px "Quicksand";
-    color: white;
+  .jumbotron .contact .stack-overflow img {
+    width: 28px;
+    height: 28px;
     position: absolute;
-    top: 1px;
     left: 6px;
+    top: 6px;
   }
