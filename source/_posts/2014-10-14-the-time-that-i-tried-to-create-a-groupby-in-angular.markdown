@@ -7,19 +7,19 @@ categories: AngularJs custom-filter ngRepeat
 ---
 A few weeks ago I decided that I wanted to develop a 'groupBy' filter,
 I knew that these kind of filters are tricky because they tend to generate
-infinie loops in the `$diggest` cycle. However, I wanted to fully understand why
+infinite loops in the `$diggest` cycle. However, I wanted to fully understand why
 these kind of `$filter`s run into this problem and what was the best way
 to overcome this issue.
 
 In this post I will explain all the steps that I took for developing this `$filter`,
 the problems that I encountered, all the things the I learned and the final implementation
-of this filter.
+of the `$filter`.
 
 <!-- more -->
 
 ###The Goal
 
-I wanted my custom 'groupBy' `$filter` to work in this way:
+I wanted my custom 'groupBy' `$filter` to work like this:
 
 * Given an `Array` of `Object`s like this one:
 
@@ -158,14 +158,9 @@ describe('Josepot\'s groupBy filter', function () {
 {% endraw %}
 {% endhighlight %}
 
-After [running the unit tests](http://plnkr.co/edit/M2mXjsWrd16uAad2dOXS?p=preview), I realized that the `$filter` used with `ngRepeat` was throwing a very scary looking exception:
+As it was already expected: [the `$filter` didn't pass the tests](http://plnkr.co/edit/M2mXjsWrd16uAad2dOXS?p=preview).
 
-{% highlight js %}
-    [$rootScope:infdig] 10 $digest() iterations reached. Aborting!
-    Watchers fired in the last 5 iterations: [["fn: $watchCollectionWatch; newVal: 22; oldVal: 19"],["fn: $watchCollectionWatch; newVal: 25; oldVal: 22"],["fn: $watchCollectionWatch; newVal: 28; oldVal: 25"],["fn: $watchCollectionWatch; newVal: 31; oldVal: 28"],["fn: $watchCollectionWatch; newVal: 34; oldVal: 31"]]
-{% endhighlight %}
-
-These tests gave me very interesting feedback:
+However, these tests gave me very interesting feedback:
 
  - This `$filter` worked well when used in JavaScript
  - It also worked well when used inside a trivial HTML template
