@@ -7,11 +7,11 @@ categories: angular
 ---
 A few weeks ago I started learning AngularJs.
 After I had learned all the basics, I decided that
-I wanted to implement a  `groupBy` `$filter`.
+I wanted to implement a 'groupBy' `$filter`.
 
 ###The Goal
 
-I wanted my custom  `groupBy` `$filter` to work in this way:
+I wanted my custom 'groupBy' `$filter` to work in this way:
 
 * Given an `Array` of `Object`s like this one:
 
