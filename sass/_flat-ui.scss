@@ -179,7 +179,7 @@
 body {
   color: $text-color;
   background: $bg-color;
-  font: 18px/1.831 "Open Sans", sans-serif; }
+  font: 17px/1.74 "Open Sans", sans-serif; }
 
 p {
   font-weight: 400; }
@@ -198,31 +198,31 @@ a {
 
 h1 {
   color: $primary-color;
-  font-size: 32px;
+  font-size: 39px;
   font-weight: 900;
   font-family: "Quicksand"; }
   .date-time{
     font-size: 15px;
     color: $accent-color2;
-    font-weight: 600;
+    font-weight: 500;
   }
   .link {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 40px;
   }
 
 h2 {
   color: $primary-color;
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 35px;
+  font-weight: 500;
   font-family: "Quicksand";
   margin-bottom: 12px;
   margin-top: 10px; }
 
 h3 {
   color: $accent-color2;
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 500;
   font-family: "Quicksand";
   margin-bottom: 12px;
   margin-top: 10px; }
@@ -234,7 +234,7 @@ h3 {
 h4 {
   color: $accent-color2;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: "Quicksand";
   line-height: 18px;
   margin-top: 4px; }

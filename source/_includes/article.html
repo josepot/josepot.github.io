@@ -1,7 +1,7 @@
 {% unless page.no_header %}
 {% if index %}
   <header class="post-header">
-    <a href="{{ root_url }}{{ post.url }}"><h2 class="post-title">{{ post.title }}</h2></a>
+    <h2 class="post-title"><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h2>
     <span class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
       {% if post.categories %}
       &nbsp;on
@@ -19,11 +19,17 @@
   </section>
 {% else %}
   <header>
-  <div class="jumbotron">
-    {% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}
-	<h5>{% include post/date.html %}<i class="icon-calendar-empty"></i> {{ time }}</h5>
-  </div>
-</header>
+    <h1>{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
+	  <span class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ page.date }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+      {% if page.categories %}
+      &nbsp;on
+      {% for category in page.categories %}
+      <a href="{{ root_url }}/{{ site.category_dir }}/{{ category | replace:' ','-' | replace:'.','-dot-' | downcase }}/">{{ category }}</a>
+      &nbsp;
+      {% endfor %}
+      {% endif %}
+    </span>
+  </header>
   <div class="row-fluid">
     <div class="span12">
       {{ content }}
