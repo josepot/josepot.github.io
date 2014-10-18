@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Entypo';
+    src: url('../fonts/entypo.eot');
+    src: url('../fonts/entypo.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/entypo.woff') format('woff'),
+         url('../fonts/entypo.ttf') format('truetype'),
+         url('../fonts/entypo.svg#Entypo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'EntypoSocial';
+    src: url('../fonts/entypo-social.eot');
+    src: url('../fonts/entypo-social.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/entypo-social.woff') format('woff'),
+         url('../fonts/entypo-social.ttf') format('truetype'),
+         url('../fonts/entypo-social.svg#EntypoSocial') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.entypo {
+	font-family: 'Entypo';
+	font-size: 2em;
+  font-style: normal;
+	font-weight: normal;
+	line-height: 0;
+    text-rendering: auto;
+}
+
+.entypo-social {
+	font-family: 'EntypoSocial';
+	font-size: 2em;
+  font-style: normal;
+	font-weight: normal;
+	line-height: 0;
+    text-rendering: auto;
+}
+
+.entypo.calendar:before{ content:'\1F4C5'; }
+.entypo.rss:before{ content:'\E73A'; }
+
+.entypo-social.c-twitter:before{ content:'\F30A'; }
+.entypo-social.c-github:before{ content:'\F301'; }
+.entypo-social.c-linkedin:before{ content:'\F319'; }
+.entypo-social.c-facebook:before{ content:'\F30D'; }
+.entypo-social.c-google:before{ content:'\F310'; }

@@ -2,7 +2,7 @@
 {% if index %}
   <header class="post-header">
     <h2 class="post-title"><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h2>
-    <div class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+    <div class="post-meta"><i class="entypo calendar"></i> <time datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
       {% if post.categories %}
       &nbsp;on
       {% for category in post.categories %}
@@ -20,7 +20,7 @@
 {% else %}
   <header>
     <h1>{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
-	  <div class="post-meta"><i class="icon-calendar-empty"></i> <time datetime="{{ page.date }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+	  <div class="post-meta"><i class="entypo calendar"></i> <time datetime="{{ page.date }}">{{ page.date | date: "%b %-d, %Y" }}</time>
       {% if page.categories %}
       &nbsp;on
       {% for category in page.categories %}
