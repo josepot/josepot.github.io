@@ -4497,10 +4497,11 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar .btn-navbar {
+  display:none;
   float: left;
   padding: 15px 10px;
   margin-right: 5px;
-  margin-left: 5px;
+  margin-left: 20px;
   color: #ffffff;
   background-color: #ededed;
   *background-color: #e5e5e5;
