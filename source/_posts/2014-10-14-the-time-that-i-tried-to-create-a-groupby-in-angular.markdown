@@ -3,7 +3,7 @@ layout: post
 title: "Creating a 'groupBy' $filter in Angular"
 date: 2014-10-14 01:00:56 -0400
 comments: true
-categories:
+categories: angular
 ---
 A few weeks ago I started learning AngularJs.
 After I had learned all the basics, I decided that
@@ -42,6 +42,8 @@ I wanted my custom  `groupBy` `$filter` to work in this way:
 </ul>
 {% endraw %}
 {% endhighlight %}
+
+<!-- more -->
 
 ###First Naive Attempt
 

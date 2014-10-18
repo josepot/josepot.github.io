@@ -1,8 +1,8 @@
 ---
 layout: default
 ---
-{% include header.html %}
-<div class="blog-index">
+<!-- include header.html -->
+<div class="col-md-10 col-md-offset-1 col-xs-12">
   {% assign index = true %}
   {% for post in paginator.posts %}
   {% assign content = post.content %}
@@ -23,4 +23,3 @@ layout: default
     {% endif %}
   </div>
 </div>
-
