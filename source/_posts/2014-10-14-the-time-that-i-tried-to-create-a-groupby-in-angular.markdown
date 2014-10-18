@@ -3,11 +3,19 @@ layout: post
 title: "Creating a 'groupBy' $filter in Angular"
 date: 2014-10-14 01:00:56 -0400
 comments: true
-categories: angular
+categories: AngularJs, custom-filter, ngRepeat
 ---
-A few weeks ago I started learning AngularJs.
-After I had learned all the basics, I decided that
-I wanted to implement a 'groupBy' `$filter`.
+A few weeks ago I decided that I wanted to develop a 'groupBy' filter,
+I knew that these kind of filters are tricky because they tend to generate
+infinie loops in the `$diggest` cycle. However, I wanted to fully understand why
+these kind of `$filter`s run into this problem and what was the best way
+to overcome this issue.
+
+In this post I will explain all the steps that I took for developing this `$filter`,
+the problems that I encountered, all the things the I learned and the final implementation
+of this filter.
+
+<!-- more -->
 
 ###The Goal
 
@@ -42,8 +50,6 @@ I wanted my custom 'groupBy' `$filter` to work in this way:
 </ul>
 {% endraw %}
 {% endhighlight %}
-
-<!-- more -->
 
 ###First Naive Attempt
 
