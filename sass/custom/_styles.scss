@@ -6,4 +6,21 @@
  article.hentry header{ margin:35px 0 25px 0;}
  .footer-page { text-align:center; }
 
-.jumbotron .contact { position:relative; z-index:99999999;}
+.jumbotron .contact { position:relative; z-index:99999999; font-size:40px;}
+  .jumbotron .contact .stack-overflow {
+    background: #e69411; display: inline-block;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin: 0;
+    border-radius: 50px;
+    position: relative;
+  }
+  .jumbotron .contact .stack-overflow:hover{ background-color:#2a6496; }
+  .jumbotron .contact .stack-overflow i {
+    font: 27px "Quicksand";
+    color: white;
+    position: absolute;
+    top: 1px;
+    left: 6px;
+  }
