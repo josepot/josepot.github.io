@@ -8,7 +8,7 @@ categories: AngularJs custom-filter ngRepeat
 A few weeks ago I decided that I wanted to develop a 'groupBy' filter,
 I knew that these kind of filters are tricky because they tend to generate
 infinite loops in the `$diggest` cycle. However, I wanted to fully understand why
-these kind of `$filter`s run into this problem and what was the best way
+this kind of `$filter`s run into this problem and what was the best way
 to overcome this issue.
 
 In this post I will explain all the steps that I took for developing this `$filter`,
@@ -17,7 +17,7 @@ of the `$filter`.
 
 <!-- more -->
 
-###The Goal
+##The Goal
 
 I wanted my custom 'groupBy' `$filter` to work like this:
 
@@ -51,7 +51,7 @@ I wanted my custom 'groupBy' `$filter` to work like this:
 {% endraw %}
 {% endhighlight %}
 
-###First Naive Attempt
+##First Naive Attempt
 
 First I wrote this `$filter`:
 
@@ -73,7 +73,7 @@ angular.module("josepot.filters", [])
 
 When I tried it out I realized that there were errors in the console.
 
-###The Problem
+##The Problem
 
 In order to trouble-shoot those errors I wrote these unit tests:
 
@@ -168,8 +168,8 @@ describe('Josepot\'s groupBy filter', function () {
 
 The `$diggest` cycle is the stage in which Angular ensures the changes of the model have settled,
 so that it can render the view with the updated changes of the model. In order to do that,
-Angular starts a loop, in which each iteration will evaluate all the template expressions
-of the View as well as its `$watcher`s and it will keep a copy of the result.
+Angular starts a loop in which each iteration evaluates all the template expressions
+of the View as well as its `$watcher`s.
 If in the current iteration the result is the same as the result of the previous one,
 then Angular will leave there, otherwise it will try again. If after 10 attempts things
 haven't settled, then Angular will exit with an error: The ["*Inifite $diggest Loop Error*" (`infdig`)][1].
@@ -189,7 +189,7 @@ passed the second unit test successfully:
 Which means that the `$diggest` cycle haven't had any issues evaluating an Angular
 Expression containing this `$filter`.
 
-Then, why is the `$filter` failing when used insed an `ngRepeat` directive?  
+Then, why is the `$filter` failing when is used inside a `ngRepeat` directive?  
 
 Because the `ngRepeat` directive adds a `$watch`er into its container's `$scope`
 for the collection that it's being iterated.
@@ -197,15 +197,13 @@ If [we have a look at the code of the `ngRepeat` directive][3] we'll find a
 line like this one:
 
 {% highlight js %}{% raw %}
-    $scope.$watchCollection(rhs,
-    	function ngRepeatAction(collection) {...
+    $scope.$watchCollection(rhs, function ngRepeatAction(collection) {...
  {% endraw %}{% endhighlight %}
 
 Which means that in our case, the `ngRepeat` directive is doing this:
 
 {% highlight js %}{% raw %}
-    $scope.$watchCollection("students | groupBy: 'class'",
-    	function ngRepeatAction(collection) {...
+    $scope.$watchCollection("students | groupBy: 'class'", function ngRepeatAction(collection) {...
 {% endraw %}{% endhighlight %}
 
 And this is what is causing the error, because our `$filter` is returning a new `Object`
@@ -226,17 +224,149 @@ Let's write a new test to make sure that that's the source of problem:
 And if we run this test we will confirm that this test is also throwing the
 ["*Inifite $diggest Loop Error*" (`infdig`)][1].
 
-###The Solution(s)
+##The Solution(s)
 
-Before I implemented this solution I actually tried 2 different techniques for "stabilizing" the `$filter`:
+Before I implemented my solution I actually tried 2 different techniques for "stabilizing" the `$filter`:
 
 * The first one (pretty bad in my opinion) is the one used by [Ariel Mashraki (a8m)][4] and that you can find [here][5].
-* The second one (much much better) is the one that [Johnny Hauser (m59peacemaker)][6] uses for stabilizing his "unstable" `$filters`, which is this [Filter Stabilizer][7] that relies on Memoization.
+* The second one (much much better) is the one that [Johnny Hauser (m59peacemaker)][6] uses for stabilizing his "unstable" `$filters`,
+which is this [Filter Stabilizer][7] that relies on Memoization.
 
-At the end of this post there are 2 appendixes where I discuss the different reasons that
-I had for not using any of these techniques for this particular `$filter`.
+Lets have a look at these 2 options.
 
-Without further ado, lets have a look at the final version of my  `$groupBy` `$filter`:
+### Ariel Mashraki's Solution
+
+That solution is the same as doing this:
+
+{% highlight js %}{% raw %}
+.filter('groupBy', function ($timeout) {
+    return function (data, key) {
+        if (!key) return data;
+        var outputPropertyName = '__groupBy__' + key;
+        if(!data[outputPropertyName]){
+            var result = {};  
+            for (var i=0;i<data.length;i++) {
+                if (!result[data[i][key]])
+                    result[data[i][key]]=[];
+                result[data[i][key]].push(data[i]);
+            }
+            Object.defineProperty(data, outputPropertyName, {enumerable:false, configurable:true, writable: false, value:result});
+            $timeout(function(){delete data[outputPropertyName];},0,false);
+        }
+        return data[outputPropertyName];
+    };
+})
+{% endraw %}{% endhighlight %}
+
+Basically what it's doing is to create a non enumerable property in the original `Array`
+that it's being filtered with the result of the `$filter`. In this way when the `$diggest`
+cycle triggers the `$filter`, this will first look if that property has already being set,
+if it hasn't it will do the 'groupBy' and will save the result in the non enumerable property,
+and if the property is there it will just return what has already been set. Also, notice that
+there is a `$timeout` that makes deletes that property after the `$diggest` cycle has finished.
+
+I must admit that this is a clever way to try trick the `$diggest` cycle and that this `$filter`
+will pass our unit test. However, this `$filter` has an important inconvenient: it can't be
+combined with other `$filter`s. For example: it won't pass this test:
+
+{% highlight js %}{% raw %}
+  it('should work inside an ngRepeat in combination with other filters', function() {
+    var elem = angular.element(
+      "<ul>" +
+       "<li ng-repeat=\"(class, classStudents) in (students|filter:'e' | groupBy:'class')\">" +
+          "{{class}}" +
+          "<ul>" +
+            "<li ng-repeat=\"student in classStudents\">" +
+              "{{student.name}}" +
+            "</li>" +
+          "</ul>" +
+        "</li>" +
+      "</ul>");
+    $compile(elem)($scope);
+    expect($scope.$digest.bind($scope)).not.toThrow();
+    expect(elem.children().length).toBe(2);
+    expect(elem.children().children().children().length).toBe(3);
+  });
+{% endraw %}{% endhighlight %}
+
+### Johnny Hauser's "Filter Stabilizer" Solution
+
+I must say that this [Filter Stabilizer][7] is **awesome** as a generic solution
+for stabilizing `$filter`s, and that if we used it for our original filter, like this:
+
+{% highlight js %}{% raw %}
+.filter('groupBy', ['pmkr.filterStabilize', function(stabilize){
+    return function (data, key) {
+        if (!(data && key)) return;
+        var result = {};
+        for (var i=0;i<data.length;i++) {
+            if (!result[data[i][key]])
+                result[data[i][key]]=[];
+            result[data[i][key]].push(data[i])
+        }
+        return result;
+    };
+}])
+.factory('pmkr.filterStabilize', [
+  'pmkr.memoize',
+  function(memoize) {
+    function service(fn) {
+      function filter() {
+        var args = [].slice.call(arguments);
+        // always pass a copy of the args so that the original input can't be modified
+        args = angular.copy(args);
+        // return the `fn` return value or input reference (makes `fn` return optional)
+        var filtered = fn.apply(this, args) || args[0];
+        return filtered;
+      }
+      var memoized = memoize(filter);
+      return memoized;
+    }
+    return service;
+  }
+])
+.factory('pmkr.memoize', [
+  function() {
+    function service() {
+      return memoizeFactory.apply(this, arguments);
+    }
+    function memoizeFactory(fn) {
+      var cache = {};
+      function memoized() {
+        var args = [].slice.call(arguments);
+        var key = JSON.stringify(args);
+        var fromCache = cache[key];
+        if (fromCache) {
+          return fromCache;
+        }
+        cache[key] = fn.apply(this, arguments);
+        return cache[key];
+      }
+      return memoized;
+    }
+    return service;
+  }
+]);
+{% endraw %}{% endhighlight %}
+
+That would pass all the tests.
+
+There is only one small inconvenient though: **memory**. If we used
+this technique with a large `Array` of objects and we intended to make lots of changes
+to that Array: add/remove items of the Array and/or filter the Array before we grouping it.
+Then, every time that the Array changes, the `memoizeFactory` will serialize the complete Array that it's
+trying to get "grouped" and will store that as the `key` of the cache used for `memoizing` the result of
+the 'groupBy' function.
+
+I must admit that in most cases that won't be an issue, but I don't want to have to worry about possible
+(although unlikely) memory leaks.
+
+### My Solution
+
+This solution relies on the fact that the `ngRepeat` directive creates a new `$scope`,
+the `$id` of which can be used for catching the result of our `$filter`. Also, we can
+listen for the `$destroy` event of that `$scope` for removing that result from the cache
+in order to avoid memory leaks. Like this:
 
 {% highlight js %}{% raw %}
 angular.module("josepot.groupBy", [])
@@ -277,9 +407,8 @@ angular.module("josepot.groupBy", [])
 })
 {% endraw %}{% endhighlight %}
 
-I want this `$filter` for using it inside the `ngRepeat` directive and the `ngRepeat`
-directive creates a new `$scope`, also I can't think of a single case where I would use this filter more than once inside an `ngRepeat`, therefore I decided that it was a safe assumption to use the `$scope.id` as an identifier of the results that I want to return. And if the  `$filter` is not used from a template and there is no `$scope` then I don't need to worry about the results being persistent and I'm safe creating a new `Object`.
-
+The only situation when this would fail would be if we tried to use this `$filter` more than once
+inside the same `$scope`, but I can't think of a single case where I would ever do that.
 
   [1]: https://docs.angularjs.org/error/$rootScope/infdig
   [2]: https://docs.angularjs.org/api/ng/directive/ngRepeat
