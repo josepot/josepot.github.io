@@ -3,7 +3,7 @@ layout: post
 title: "Creating a 'groupBy' $filter in Angular"
 date: 2014-10-14 01:00:56 -0400
 comments: true
-categories: AngularJs custom-filter ngRepeat
+categories: AngularJs custom-filter ngRepeat unit-testing jasmine
 ---
 A few weeks ago I decided that I wanted to develop a 'groupBy' `$filter`.
 I knew that these kind of filters are tricky because they tend to generate
