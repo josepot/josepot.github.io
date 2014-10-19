@@ -56,7 +56,7 @@ I wanted my custom 'groupBy' `$filter` to work like this:
 First I wrote this `$filter`:
 
 {% highlight js %}
-angular.module("josepot.filters", [])
+angular.module("sbrpr.filters", [])
 .filter('groupBy', function () {
     return function (data, key) {
         if (!(data && key)) return;
@@ -68,10 +68,10 @@ angular.module("josepot.filters", [])
         }
         return result;
     };
-})
+});
 {% endhighlight %}
 
-When I tried it out I realized that there were errors in the console.
+When [I tried it out](http://jsfiddle.net/xf7w9h12/1/) I realized that there were errors in the console.
 
 ##The Problem
 
@@ -79,11 +79,11 @@ In order to troubleshoot those errors I wrote these unit tests:
 
 {% highlight js %}
 {% raw %}
-describe('Josepot\'s groupBy filter', function () {
-  var $filterProvider, $compile, $scope, $filter, students;
+describe('groupBy filter', function () {
+  var $filterProvider, $compile, $scope, $filter;
 
   beforeEach(function(){
-    module('josepot.filters');
+    module('sbrpr.filters');
     inject(function (_$filter_, _$rootScope_, _$compile_) {
       $filter = _$filter_;
       $compile = _$compile_;
@@ -104,7 +104,7 @@ describe('Josepot\'s groupBy filter', function () {
         }
     });
 
-    students = [
+    $scope.students = [
         {ID: 1,  name: 'Josep',  class: 'A'},
         {ID: 2,  name: 'Carles', class: 'B'},
         {ID: 3,  name: 'Xavi',   class: 'A'},
@@ -114,7 +114,7 @@ describe('Josepot\'s groupBy filter', function () {
   });
 
   it('should group students by class', function(){
-    var grouppedStudents = $filter('groupBy')(students, 'class');
+    var grouppedStudents = $filter('groupBy')($scope.students, 'class');
     var expectedResult = {
       'A': [
         {ID: 1,  name: 'Josep',  class: 'A'},
@@ -132,14 +132,12 @@ describe('Josepot\'s groupBy filter', function () {
   });
 
   it('should work in a view', function() {
-    $scope.students = students;
     var elem = angular.element("<p>{{students | groupBy: 'class'}}</p>");
     $compile(elem)($scope);
     expect($scope.$digest.bind($scope)).not.toThrow();
   });
 
   it('should work in a view combined with ngRepeat', function() {
-    $scope.students = students;
     var elem = angular.element(
       "<ul>" +
        "<li ng-repeat=\"(class, classStudents) in (students | groupBy: 'class')\">" +
@@ -153,12 +151,14 @@ describe('Josepot\'s groupBy filter', function () {
       "</ul>");
     $compile(elem)($scope);
     expect($scope.$digest.bind($scope)).not.toThrow();
+    expect(elem.children().length).toBe(3);
+    expect(elem.children().children().children().length).toBe(5);
   });
 });
 {% endraw %}
 {% endhighlight %}
 
-[These tests](http://plnkr.co/edit/M2mXjsWrd16uAad2dOXS?p=preview) provided interesting feedback:
+[The results of these tests](http://plnkr.co/edit/22O4xbU0wweLCJws7qZC?p=preview) provided interesting feedback:
 
  - The `$filter` worked well when used in JavaScript
  - It also worked well when used inside a trivial HTML template
@@ -222,7 +222,7 @@ So, I wrote a new test to make sure that was the source of problem:
   });
 {% endraw %}{% endhighlight %}
 
-After running it, I confirmed this test was also throwing the
+[After running it](http://plnkr.co/edit/sRUSFy0FpmmSdC5NFm1f?p=preview), I confirmed this test was also throwing the
 ["*Inifite $diggest Loop Error*" (`infdig`)][1].
 
 ##The Solution(s)
@@ -268,7 +268,7 @@ there is a `$timeout` that deletes that property after the `$diggest` cycle has 
 
 I must admit that this is a clever way to try to trick the `$diggest` cycle and that this `$filter`
 would pass the unit tests. However, this `$filter` has an issue: it can't be
-combined with other `$filter`s. For example, it wouldn't pass this test:
+combined with other `$filter`s. For example, [it wouldn't pass this test](http://plnkr.co/edit/SSw0mKePtP8NvYNO00uO?p=preview):
 
 {% highlight js %}{% raw %}
   it('should work inside an ngRepeat in combination with other filters', function() {
@@ -294,11 +294,12 @@ combined with other `$filter`s. For example, it wouldn't pass this test:
 
 I must say that this [Filter Stabilizer][7] is **awesome** as a generic solution
 for stabilizing `$filter`s, and that if it was used for the original filter, like this,
-it would pass all the tests:
+[it would pass all the tests](http://plnkr.co/edit/uAUE9g9STrMpsWc43vYO?p=preview):
 
 {% highlight js %}{% raw %}
+angular.module("pmkr.filters", [])
 .filter('groupBy', ['pmkr.filterStabilize', function(stabilize){
-    return function (data, key) {
+    return stabilize( function (data, key) {
         if (!(data && key)) return;
         var result = {};
         for (var i=0;i<data.length;i++) {
@@ -307,7 +308,7 @@ it would pass all the tests:
             result[data[i][key]].push(data[i])
         }
         return result;
-    };
+    });
 }])
 .factory('pmkr.filterStabilize', [
   'pmkr.memoize',
@@ -369,7 +370,7 @@ it's possible to listen for the `$destroy` event of that `$scope` to remove
 its cached result in order to avoid memory leaks.
 
 {% highlight js %}{% raw %}
-angular.module("josepot.groupBy", [])
+angular.module("sbrpr.filters", [])
 .filter('groupBy', function () {
   var results={};
     return function (data, key) {
@@ -404,10 +405,10 @@ angular.module("josepot.groupBy", [])
         }
         return result;
     };
-})
+});
 {% endraw %}{% endhighlight %}
 
-The only situation where this would fail would be if the `$filter` was used more than once
+It [passes all the tests][8], and the only situation where this would fail would be if the `$filter` was used more than once
 inside the same `$scope`, but I can't think of a single case where this would actually be a problem.
 
   [1]: https://docs.angularjs.org/error/$rootScope/infdig
@@ -417,3 +418,4 @@ inside the same `$scope`, but I can't think of a single case where this would ac
   [5]: https://github.com/a8m/angular-filter/blob/master/src/_filter/collection/group-by.js
   [6]: https://github.com/m59peacemaker
   [7]: https://github.com/m59peacemaker/angular-pmkr-components/tree/master/src/services/filterStabilize
+  [8]: http://plnkr.co/edit/Trr3dIEplKxODk4WpqTr?p=preview
