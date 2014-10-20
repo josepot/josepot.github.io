@@ -459,7 +459,7 @@ for stabilizing <code>$filter</code>s, and that if it was used for the original 
 <p>There is only one small inconvenience though: <strong>memory</strong>. If this technique is used
 with a large <code>Array</code> of objects and many changes are made to it
 (i.e. add/remove items and/or filter the Array before grouping it),
-then, every time that the Array changes, the <code>memoizeFactory</code> will serialize it.
+then, every time that the Array changes, the <code>memoized</code> function will serialize it.
 And it will then store that as the <code>key</code> of the cache used for &lsquo;memoizing&rsquo; the result of
 the &lsquo;groupBy&rsquo; function.</p>
 

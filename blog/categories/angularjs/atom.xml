@@ -4,7 +4,7 @@
   <title><![CDATA[Category: angularjs | Josep M Sobrepere]]></title>
   <link href="http://sobrepere.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://sobrepere.com/"/>
-  <updated>2014-10-19T23:13:08-04:00</updated>
+  <updated>2014-10-20T00:37:56-04:00</updated>
   <id>http://sobrepere.com/</id>
   <author>
     <name><![CDATA[Josep M Sobrepere]]></name>
@@ -361,7 +361,7 @@ for stabilizing <code>$filter</code>s, and that if it was used for the original 
 <p>There is only one small inconvenience though: <strong>memory</strong>. If this technique is used
 with a large <code>Array</code> of objects and many changes are made to it
 (i.e. add/remove items and/or filter the Array before grouping it),
-then, every time that the Array changes, the <code>memoizeFactory</code> will serialize it.
+then, every time that the Array changes, the <code>memoized</code> function will serialize it.
 And it will then store that as the <code>key</code> of the cache used for &lsquo;memoizing&rsquo; the result of
 the &lsquo;groupBy&rsquo; function.</p>
 
