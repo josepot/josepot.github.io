@@ -389,8 +389,8 @@ angular.module("sbrpr.filters", [])
             result = results[scopeId];
         }
 
-        for(var k in result)
-          result[k].splice(0,result[k].length);
+        for(var groupKey in result)
+          result[groupKey].splice(0,result[groupKey].length);
 
         for (var i=0; i<data.length; i++) {
             if (!result[data[i][key]])
@@ -399,9 +399,9 @@ angular.module("sbrpr.filters", [])
         }
 
         var keys = Object.keys(result);
-        for(var i=0; i<keys.length; i++){
-          if(result[keys[i]].length===0)
-            delete result[keys[i]];
+        for(var k=0; k<keys.length; k++){
+          if(result[keys[k]].length===0)
+            delete result[keys[k]];
         }
         return result;
     };

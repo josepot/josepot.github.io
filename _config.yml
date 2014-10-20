@@ -4,7 +4,7 @@
 
 url: http://sobrepere.com
 title: Josep M Sobrepere
-subtitle: Some Developer's Thoughts
+subtitle: Develop | Share | Re-Develop
 author: Josep M Sobrepere
 simple_search: https://www.google.com/search
 description:
@@ -100,7 +100,7 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
+disqus_short_name: josepot
 disqus_show_comment_count: false
 
 # Google Analytics
