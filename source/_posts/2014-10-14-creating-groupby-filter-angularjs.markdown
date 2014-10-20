@@ -355,7 +355,7 @@ angular.module("pmkr.filters", [])
 There is only one small inconvenience though: **memory**. If this technique is used
 with a large `Array` of objects and many changes are made to it
 (i.e. add/remove items and/or filter the Array before grouping it),
-then, every time that the Array changes, the `memoizeFactory` will serialize it.
+then, every time that the Array changes, the `memoized` function will serialize it.
 And it will then store that as the `key` of the cache used for 'memoizing' the result of
 the 'groupBy' function.
 
