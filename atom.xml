@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-<<<<<<< HEAD
   <title><![CDATA[Josep M Sobrepere]]></title>
   <link href="http://sobrepere.com/atom.xml" rel="self"/>
   <link href="http://sobrepere.com/"/>
-  <updated>2014-10-19T22:28:53-04:00</updated>
-=======
-  <title><![CDATA[Josep M Sobrepere | My Angular Journey]]></title>
-  <link href="http://sobrepere.com/atom.xml" rel="self"/>
-  <link href="http://sobrepere.com/"/>
-  <updated>2014-10-14T00:45:27-04:00</updated>
->>>>>>> fc7d4f2677631c7baf8654fa8ac8b05052451b25
+  <updated>2014-10-19T22:33:26-04:00</updated>
   <id>http://sobrepere.com/</id>
   <author>
     <name><![CDATA[Josep M Sobrepere]]></name>
@@ -20,7 +13,6 @@
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
-<<<<<<< HEAD
   <entry>
     <title type="html"><![CDATA[Creating a 'groupBy' $filter in Angular]]></title>
     <link href="http://sobrepere.com/blog/2014/10/14/creating-groupby-filter-angularjs/"/>
@@ -430,6 +422,4 @@ inside the same <code>$scope</code>, but I can&rsquo;t think of a single case wh
 ]]></content>
   </entry>
   
-=======
->>>>>>> fc7d4f2677631c7baf8654fa8ac8b05052451b25
 </feed>
