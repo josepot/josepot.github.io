@@ -229,7 +229,7 @@ So, I wrote a new test to make sure that was the source of problem:
 
 Before I implemented my solution I tried 2 different techniques for "stabilizing" the `$filter`:
 
-* The first one (pretty bad in my opinion) is used by [Ariel Mashraki (a8m)][4] which you can find [here][5].
+* The first one is used by [Ariel Mashraki (a8m)][4] which you can find [here][5].
 * The second one (much better) is the one that [Johnny Hauser (m59peacemaker)][6] uses for stabilizing
 his "unstable" `$filters`, which is this [Filter Stabilize][7] that relies on Memoization.
 
@@ -268,7 +268,7 @@ there is a `$timeout` that deletes that property after the `$diggest` cycle has 
 
 I must admit that this is a clever way to try to trick the `$diggest` cycle and that this `$filter`
 would pass the unit tests. However, this `$filter` has an issue: it can't be
-combined with other `$filter`s. For example, [it wouldn't pass this test](http://plnkr.co/edit/SSw0mKePtP8NvYNO00uO?p=preview):
+combined with other `$filter`s. For example, [it wouldn't pass this test](http://plnkr.co/edit/Mo4PdOd3s0VQlhc68VvH?p=preview):
 
 {% highlight js %}{% raw %}
   it('should work inside an ngRepeat in combination with other filters', function() {
