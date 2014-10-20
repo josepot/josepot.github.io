@@ -1,4 +1,8 @@
 User-agent: *
 Disallow: 
 
+<<<<<<< HEAD
 Sitemap: http://sobrepere.com/sitemap.xml 
+=======
+Sitemap: http://sobrepere.com/sitemap.xml 
+>>>>>>> fc7d4f2677631c7baf8654fa8ac8b05052451b25
