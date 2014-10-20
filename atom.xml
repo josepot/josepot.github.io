@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Josep M Sobrepere | My Angular Journey]]></title>
+  <link href="http://sobrepere.com/atom.xml" rel="self"/>
+  <link href="http://sobrepere.com/"/>
+  <updated>2014-10-14T00:45:27-04:00</updated>
+  <id>http://sobrepere.com/</id>
+  <author>
+    <name><![CDATA[Josep M Sobrepere]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>
