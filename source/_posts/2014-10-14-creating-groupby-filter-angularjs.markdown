@@ -231,7 +231,7 @@ Before I implemented my solution I tried 2 different techniques for "stabilizing
 
 * The first one (pretty bad in my opinion) is used by [Ariel Mashraki (a8m)][4] which you can find [here][5].
 * The second one (much better) is the one that [Johnny Hauser (m59peacemaker)][6] uses for stabilizing
-his "unstable" `$filters`, which is this [Filter Stabilizer][7] that relies on Memoization.
+his "unstable" `$filters`, which is this [Filter Stabilize][7] that relies on Memoization.
 
 Lets have a look at these 2 options.
 
@@ -290,9 +290,9 @@ combined with other `$filter`s. For example, [it wouldn't pass this test](http:/
   });
 {% endraw %}{% endhighlight %}
 
-### Johnny Hauser's "Filter Stabilizer" Solution
+### Johnny Hauser's "Filter Stabilize" Solution
 
-I must say that this [Filter Stabilizer][7] is **awesome** as a generic solution
+I must say that this [Filter Stabilize][7] is **awesome** as a generic solution
 for stabilizing `$filter`s, and that if it was used for the original filter, like this,
 [it would pass all the tests](http://plnkr.co/edit/uAUE9g9STrMpsWc43vYO?p=preview):
 
