@@ -162,7 +162,7 @@ describe('groupBy filter', function () {
 
  - The `$filter` worked well when used in JavaScript
  - It also worked well when used inside a trivial HTML template
- - It triggered an ["*Inifite $diggest Loop Error*" (`infdig`)][1] when used inside a [`ngRepeat` directive][2]
+ - It triggered an ["*Infite $diggest Loop Error*" (`infdig`)][1] when used inside a [`ngRepeat` directive][2]
 
 ###The `$diggest` cycle always rings (at least) twice
 
@@ -173,7 +173,7 @@ of the view, as well as the `$watcher` functions of the `$scope`.
 If in the current iteration the result is the same as the previous one,
 then Angular will exit the loop. Otherwise, it will try again.
 If after 10 attempts things haven't settled, Angular will exit
-with an error: The ["*Inifite $diggest Loop Error*" (`infdig`)][1].
+with an error: The ["*Infite $diggest Loop Error*" (`infdig`)][1].
 
 Despite this, it's still not obvious why the `$filter` is causing that error.
 After all, the `$filter` passed the second unit test successfully:
@@ -223,7 +223,7 @@ So, I wrote a new test to make sure that was the source of problem:
 {% endraw %}{% endhighlight %}
 
 [After running it](http://plnkr.co/edit/sRUSFy0FpmmSdC5NFm1f?p=preview), I confirmed this test was also throwing the
-["*Inifite $diggest Loop Error*" (`infdig`)][1].
+["*Infite $diggest Loop Error*" (`infdig`)][1].
 
 ##The Solution(s)
 
