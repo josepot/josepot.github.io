@@ -4,11 +4,7 @@
   <title><![CDATA[Category: jasmine | Josep M Sobrepere]]></title>
   <link href="http://sobrepere.com/blog/categories/jasmine/atom.xml" rel="self"/>
   <link href="http://sobrepere.com/"/>
-<<<<<<< HEAD
   <updated>2014-10-20T10:01:00-04:00</updated>
-=======
-  <updated>2014-10-20T00:37:56-04:00</updated>
->>>>>>> 3f070406d6b4d91ac9d2a65efe642de357e91a79
   <id>http://sobrepere.com/</id>
   <author>
     <name><![CDATA[Josep M Sobrepere]]></name>
@@ -243,11 +239,7 @@ into an infinite loop for the <code>$watchCollection</code> function.</p>
 <p>Before I implemented my solution I tried 2 different techniques for &ldquo;stabilizing&rdquo; the <code>$filter</code>:</p>
 
 <ul>
-<<<<<<< HEAD
 <li>The first one is used by <a href="https://github.com/a8m">Ariel Mashraki (a8m)</a> which you can find <a href="https://github.com/a8m/angular-filter/blob/master/src/_filter/collection/group-by.js">here</a>.</li>
-=======
-<li>The first one (pretty bad in my opinion) is used by <a href="https://github.com/a8m">Ariel Mashraki (a8m)</a> which you can find <a href="https://github.com/a8m/angular-filter/blob/master/src/_filter/collection/group-by.js">here</a>.</li>
->>>>>>> 3f070406d6b4d91ac9d2a65efe642de357e91a79
 <li>The second one (much better) is the one that <a href="https://github.com/m59peacemaker">Johnny Hauser (m59peacemaker)</a> uses for stabilizing
 his &ldquo;unstable&rdquo; <code>$filters</code>, which is this <a href="https://github.com/m59peacemaker/angular-pmkr-components/tree/master/src/services/filterStabilize">Filter Stabilize</a> that relies on Memoization.</li>
 </ul>
@@ -286,11 +278,7 @@ there is a <code>$timeout</code> that deletes that property after the <code>$dig
 
 <p>I must admit that this is a clever way to try to trick the <code>$diggest</code> cycle and that this <code>$filter</code>
 would pass the unit tests. However, this <code>$filter</code> has an issue: it can&rsquo;t be
-<<<<<<< HEAD
 combined with other <code>$filter</code>s. For example, <a href="http://plnkr.co/edit/Mo4PdOd3s0VQlhc68VvH?p=preview">it wouldn&rsquo;t pass this test</a>:</p>
-=======
-combined with other <code>$filter</code>s. For example, <a href="http://plnkr.co/edit/SSw0mKePtP8NvYNO00uO?p=preview">it wouldn&rsquo;t pass this test</a>:</p>
->>>>>>> 3f070406d6b4d91ac9d2a65efe642de357e91a79
 
 <p><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">it</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">should</span> <span class="nx">work</span> <span class="nx">inside</span> <span class="nx">an</span> <span class="nx">ngRepeat</span> <span class="k">in</span> <span class="nx">combination</span> <span class="kd">with</span> <span class="nx">other</span> <span class="nx">filters</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">element</span><span class="p">(</span>
