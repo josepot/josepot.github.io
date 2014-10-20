@@ -4,7 +4,7 @@
   <title><![CDATA[Category: custom-filter | Josep M Sobrepere]]></title>
   <link href="http://sobrepere.com/blog/categories/custom-filter/atom.xml" rel="self"/>
   <link href="http://sobrepere.com/"/>
-  <updated>2014-10-19T23:03:14-04:00</updated>
+  <updated>2014-10-19T23:13:08-04:00</updated>
   <id>http://sobrepere.com/</id>
   <author>
     <name><![CDATA[Josep M Sobrepere]]></name>
@@ -177,7 +177,7 @@ of the <code>$filter</code>.</p>
 <ul>
 <li>The <code>$filter</code> worked well when used in JavaScript</li>
 <li>It also worked well when used inside a trivial HTML template</li>
-<li>It triggered an <a href="https://docs.angularjs.org/error/$rootScope/infdig">&ldquo;<em>Inifite $diggest Loop Error</em>&rdquo; (<code>infdig</code>)</a> when used inside a <a href="https://docs.angularjs.org/api/ng/directive/ngRepeat"><code>ngRepeat</code> directive</a></li>
+<li>It triggered an <a href="https://docs.angularjs.org/error/$rootScope/infdig">&ldquo;<em>Infite $diggest Loop Error</em>&rdquo; (<code>infdig</code>)</a> when used inside a <a href="https://docs.angularjs.org/api/ng/directive/ngRepeat"><code>ngRepeat</code> directive</a></li>
 </ul>
 
 
@@ -190,7 +190,7 @@ of the view, as well as the <code>$watcher</code> functions of the <code>$scope<
 If in the current iteration the result is the same as the previous one,
 then Angular will exit the loop. Otherwise, it will try again.
 If after 10 attempts things haven&rsquo;t settled, Angular will exit
-with an error: The <a href="https://docs.angularjs.org/error/$rootScope/infdig">&ldquo;<em>Inifite $diggest Loop Error</em>&rdquo; (<code>infdig</code>)</a>.</p>
+with an error: The <a href="https://docs.angularjs.org/error/$rootScope/infdig">&ldquo;<em>Infite $diggest Loop Error</em>&rdquo; (<code>infdig</code>)</a>.</p>
 
 <p>Despite this, it&rsquo;s still not obvious why the <code>$filter</code> is causing that error.
 After all, the <code>$filter</code> passed the second unit test successfully:</p>
@@ -232,7 +232,7 @@ into an infinite loop for the <code>$watchCollection</code> function.</p>
   <span class="p">});</span></code></pre></div></p>
 
 <p><a href="http://plnkr.co/edit/sRUSFy0FpmmSdC5NFm1f?p=preview">After running it</a>, I confirmed this test was also throwing the
-<a href="https://docs.angularjs.org/error/$rootScope/infdig">&ldquo;<em>Inifite $diggest Loop Error</em>&rdquo; (<code>infdig</code>)</a>.</p>
+<a href="https://docs.angularjs.org/error/$rootScope/infdig">&ldquo;<em>Infite $diggest Loop Error</em>&rdquo; (<code>infdig</code>)</a>.</p>
 
 <h2>The Solution(s)</h2>
 
